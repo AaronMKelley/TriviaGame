@@ -4,7 +4,7 @@ var correctAnswers=0;
 var wrongAnswers=0;
 var unanswered=0;
 var questionCounter=0;
-var counter= 11;
+var counter= 31;
 var inter;
 
 
@@ -57,8 +57,8 @@ var questions = [
 $('#start').on('click',function(x){
     startGame()
     $('#start').remove();
-    // var inter= setInterval(addTimer,1000);
-    // setInterval(addTimer,1000)
+    // $('#multipleChoice').append('<iframe width="560" height="315" value="1" src="https://www.youtube.com/embed/ysmMoMsoDVs" allow="autoplay"> </iframe>')
+
 })
 
 $(document).on('click', ".answer-button", function(x){
@@ -87,8 +87,10 @@ function startGame (){
    var question= $('<span>');
    question.text(questions[questionCounter].question);
     $('#question').html(question)
+    $('#question').css({"font-size":"200%"});
     for (var i = 0; i < questions[questionCounter].choices.length; i++){
-        $('#multipleChoice').append('<button class="answer-button" id="button"' + 'data-name="' + questions[questionCounter].choices[i] + '">' + questions[questionCounter].choices[i] + '</button>');
+        $('#multipleChoice').append('<button class="answer-button" id="button" '+ 'data-name="' + questions[questionCounter].choices[i] + '">' + questions[questionCounter].choices[i] + '</button>');
+        $("#multipleChoice").css({"font-size": "200%" ,"font-family":"Arial", "font-weight":"bold"});
         $('<button>').addClass("answer-button");
     }
 }
@@ -122,7 +124,6 @@ function answeredCorrectly(){
     $("#multipleChoice").empty();
     $('#question').html("Correct!")
     $('#multipleChoice').append('<img src="' + questions[questionCounter].correctImage + '" />')
-
     if (questionCounter===questions.length-1){
         setTimeout(results,7000)
     }
@@ -137,7 +138,6 @@ function answeredIncorrectly(){
     $("#multipleChoice").empty();
     $('#question').html("Wrong! The Correct Answer Was:"+questions[questionCounter].choiceAnswer);
     $('#image').append('<img src="' + questions[questionCounter].wrongImage + '" />')
-
     if (questionCounter===questions.length-1){
         setTimeout(results,7000)
     }
@@ -175,7 +175,7 @@ function reset(){
 function results(){
 clearInterval(inter)
 $('#time').empty();
-$('#mutlipleChoice').empty();
+$('#multipleChoice').empty();
 $('#question').html("Thanks for Playing")
 $('#message').html(' '+"Correct Answers:"+' '+correctAnswers+' '+"Wrong Answers:"+' '+wrongAnswers+' '+'Unanswered:'+' '+unanswered);
 // $('#image').remove();
@@ -189,6 +189,7 @@ if (correctAnswers>wrongAnswers){
 }else if (correctAnswers=wrongAnswers){
     $('#image').html("SUBPAR. Come on now,you don't want to to the Meridith of the group")
     $('#multipleChoice').html('<img src="assets/images/OFFICESUBPAR.gif">')
+    
 }
 }
 
